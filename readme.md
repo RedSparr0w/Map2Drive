@@ -1,4 +1,5 @@
-# Map2Drive
+# Map2Drive ![](https://img.shields.io/github/release/RedSparr0w/Map2Drive.svg?label=latest%20release)
+
 ### About
 Adds an option on the context menu when you right click a folder to map that folder to a drive letter
 
