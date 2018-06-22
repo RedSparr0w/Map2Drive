@@ -1,7 +1,7 @@
 Select Case WScript.Arguments(0)
   Case "Mount"
     mount_path = getPath(WScript.Arguments(1))
-    If WScript.Arguments(1) = "auto" Then
+    If WScript.Arguments(1) = "Auto" Then
       drive_letter = "*"
       drive_name = ""
       drive_persist = "no"
