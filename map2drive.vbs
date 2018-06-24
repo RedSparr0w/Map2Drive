@@ -14,7 +14,7 @@ Select Case WScript.Arguments(0)
     Call mountDrive(mount_path, drive_letter, drive_name, drive_persist)
   Case "Rename"
     drive_name = getDriveName()
-    Call renameDrive(WScript.Arguments(1), drive_name)
+    Call renameDrive(WScript.Arguments(1), drive_name, 0)
   Case "Remove"
     Call removeDrive(WScript.Arguments(1))
   Case Else
@@ -93,14 +93,21 @@ End Function
 Sub mountDrive(map_path, drive_letter, drive_name, drive_persist)
   CreateObject("Wscript.Shell").Run "C:\WINDOWS\system32\net.exe use " & drive_letter & " " & chr(34) & map_path & chr(34) & " /P:" & drive_persist, 0, False
   If drive_name <> "" Then
-    WScript.Sleep 5000
-    Call renameDrive(drive_letter, drive_name)
+    Call renameDrive(drive_letter, drive_name, 0)
   End If
 End Sub
 
-Sub renameDrive(drive_letter, drive_name)
-  Set objShell = CreateObject("Shell.Application")
-  objShell.NameSpace(drive_letter).Self.Name = drive_name
+Sub renameDrive(drive_letter, drive_name, attempt)
+  If doesDriveExist(drive_letter) Then
+    Set objShell = CreateObject("Shell.Application")
+    objShell.NameSpace(drive_letter).Self.Name = drive_name
+  ElseIf attempt <= 10 Then
+    WScript.Sleep 1000
+    Call renameDrive(drive_letter, drive_name, attempt + 1)
+  Else
+    MsgBox "Error renaming " & drive_letter & " drive," & vbCrlf & "Please ensure this drive exist and try again.", 48, "Map2Drive"
+    WScript.Quit
+  End If
 End Sub
 
 Sub removeDrive(drive_letter)
