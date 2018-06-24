@@ -1,7 +1,7 @@
 Select Case WScript.Arguments(0)
   Case "Mount"
     mount_path = getPath(WScript.Arguments(1))
-    If WScript.Arguments(1) = "Auto" Then
+    If WScript.Arguments(2) = "Auto" Then
       drive_letter = "*"
       drive_name = ""
       drive_persist = "no"
@@ -14,7 +14,7 @@ Select Case WScript.Arguments(0)
     Call mountDrive(mount_path, drive_letter, drive_name, drive_persist)
   Case "Rename"
     drive_name = getDriveName()
-    Call removeDrive(WScript.Arguments(1), drive_name)
+    Call renameDrive(WScript.Arguments(1), drive_name)
   Case "Remove"
     Call removeDrive(WScript.Arguments(1))
   Case Else
@@ -33,9 +33,9 @@ End Function
 
 Function getDriveLetter(error_message)
   If error_message <> False Then
-    drive_letter = InputBox("Enter a drive letter:" & vbCrlf & error_message,"Map2Drive","Z")
+    drive_letter = InputBox("Enter a drive letter:" & vbCrlf & error_message, "Map2Drive", "Z")
   Else
-    drive_letter = InputBox("Enter a drive letter:","Map2Drive","Z")
+    drive_letter = InputBox("Enter a drive letter:", "Map2Drive", "Z")
   End If
 
   If IsEmpty(drive_letter) Then
@@ -91,10 +91,10 @@ Function regexTest(pattern, drive_letter)
 End Function
 
 Sub mountDrive(map_path, drive_letter, drive_name, drive_persist)
-  CreateObject("Wscript.Shell").Run "C:\WINDOWS\system32\net.exe use " & drive_letter & " " & chr(34) & map_path & chr(34) & " /P:" & mapPersist, 0, False
+  CreateObject("Wscript.Shell").Run "C:\WINDOWS\system32\net.exe use " & drive_letter & " " & chr(34) & map_path & chr(34) & " /P:" & drive_persist, 0, False
   If drive_name <> "" Then
     WScript.Sleep 5000
-    renameDrive(drive_name)
+    Call renameDrive(drive_letter, drive_name)
   End If
 End Sub
 

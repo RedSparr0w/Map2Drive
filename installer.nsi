@@ -51,9 +51,7 @@ section "install"
 	setOutPath $INSTDIR
 	# Files added here should be removed by the uninstaller (see section "uninstall")
   file "credits.md"
-	file "map_drive.vbs"
-	file "remove_mapped_drive.vbs"
-	file "rename_mapped_drive.vbs"
+	file "map2drive.vbs"
 	file "logo.ico"
 	# Add any other files for the install directory (license files, app data, etc) here
 
@@ -120,9 +118,7 @@ section "uninstall"
 
 	# Remove files
 	delete $INSTDIR\credits.md
-	delete $INSTDIR\map_drive.vbs
-	delete $INSTDIR\remove_mapped_drive.vbs
-	delete $INSTDIR\rename_mapped_drive.vbs
+	delete $INSTDIR\map2drive.vbs
 	delete $INSTDIR\logo.ico
 
 	# Always delete uninstaller as the last action
