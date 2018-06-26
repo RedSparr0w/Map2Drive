@@ -1,7 +1,8 @@
 # Map2Drive
 
-###Contributors:
-[RedSparr0w](https://github.com/RedSparr0w)
+### Credits:
 
-###Other Credits:
-[roundicons](https://www.flaticon.com/authors/roundicons) - icon
+&nbsp; | Link
+:--: | :--:
+Author | [RedSparr0w](https://github.com/RedSparr0w)
+Icon | [Roundicons](https://www.flaticon.com/authors/roundicons)
