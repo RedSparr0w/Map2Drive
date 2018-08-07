@@ -51,9 +51,7 @@ section "install"
 	setOutPath $INSTDIR
 	# Files added here should be removed by the uninstaller (see section "uninstall")
   file "credits.md"
-	file "map_drive.vbs"
-	file "remove_mapped_drive.vbs"
-	file "rename_mapped_drive.vbs"
+	file "map2drive.vbs"
 	file "logo.ico"
 	# Add any other files for the install directory (license files, app data, etc) here
 
@@ -65,10 +63,10 @@ section "install"
   WriteRegStr HKCR "Folder\shell\${APPNAME}\shell" "" ""
   WriteRegStr HKCR "Folder\shell\${APPNAME}\shell\AutoMapDrive" "" "Quick Map Drive"
   WriteRegStr HKCR "Folder\shell\${APPNAME}\shell\AutoMapDrive" "icon" "shell32.dll,9"
-  WriteRegStr HKCR "Folder\shell\${APPNAME}\shell\AutoMapDrive\command" "" "C:\WINDOWS\system32\wscript.exe $\"$INSTDIR\map_drive.vbs$\" $\"%1$\" auto"
+  WriteRegStr HKCR "Folder\shell\${APPNAME}\shell\AutoMapDrive\command" "" "C:\WINDOWS\system32\wscript.exe $\"$INSTDIR\map2drive.vbs$\" Mount $\"%1$\" Auto"
   WriteRegStr HKCR "Folder\shell\${APPNAME}\shell\MapDrive" "" "Map Drive"
   WriteRegStr HKCR "Folder\shell\${APPNAME}\shell\MapDrive" "icon" "shell32.dll,149"
-  WriteRegStr HKCR "Folder\shell\${APPNAME}\shell\MapDrive\command" "" "C:\WINDOWS\system32\wscript.exe $\"$INSTDIR\map_drive.vbs$\" $\"%1$\" manual"
+  WriteRegStr HKCR "Folder\shell\${APPNAME}\shell\MapDrive\command" "" "C:\WINDOWS\system32\wscript.exe $\"$INSTDIR\map2drive.vbs$\" Mount $\"%1$\" Manual"
   ## Drives
   WriteRegStr HKCR "Drive\shell\${APPNAME}" "subcommands" ""
   WriteRegStr HKCR "Drive\shell\${APPNAME}" "MUIVerb" "${APPNAME}"
@@ -76,10 +74,10 @@ section "install"
   WriteRegStr HKCR "Drive\shell\${APPNAME}\shell" "" ""
   WriteRegStr HKCR "Drive\shell\${APPNAME}\shell\RenameMappedDrive" "" "Rename Drive"
   WriteRegStr HKCR "Drive\shell\${APPNAME}\shell\RenameMappedDrive" "icon" "shell32.dll,53"
-  WriteRegStr HKCR "Drive\shell\${APPNAME}\shell\RenameMappedDrive\command" "" "C:\WINDOWS\system32\wscript.exe $\"$INSTDIR\rename_mapped_drive.vbs$\" $\"%1$\""
+  WriteRegStr HKCR "Drive\shell\${APPNAME}\shell\RenameMappedDrive\command" "" "C:\WINDOWS\system32\wscript.exe $\"$INSTDIR\map2drive.vbs$\" Rename $\"%1$\""
   WriteRegStr HKCR "Drive\shell\${APPNAME}\shell\RemoveMappedDrive" "" "Remove Drive"
   WriteRegStr HKCR "Drive\shell\${APPNAME}\shell\RemoveMappedDrive" "icon" "shell32.dll,10"
-  WriteRegStr HKCR "Drive\shell\${APPNAME}\shell\RemoveMappedDrive\command" "" "C:\WINDOWS\system32\wscript.exe $\"$INSTDIR\remove_mapped_drive.vbs$\" $\"%1$\""
+  WriteRegStr HKCR "Drive\shell\${APPNAME}\shell\RemoveMappedDrive\command" "" "C:\WINDOWS\system32\wscript.exe $\"$INSTDIR\map2drive.vbs$\" Remove $\"%1$\""
 
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
 	writeUninstaller "$INSTDIR\uninstall.exe"
@@ -120,9 +118,7 @@ section "uninstall"
 
 	# Remove files
 	delete $INSTDIR\credits.md
-	delete $INSTDIR\map_drive.vbs
-	delete $INSTDIR\remove_mapped_drive.vbs
-	delete $INSTDIR\rename_mapped_drive.vbs
+	delete $INSTDIR\map2drive.vbs
 	delete $INSTDIR\logo.ico
 
 	# Always delete uninstaller as the last action
