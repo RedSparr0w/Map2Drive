@@ -8,7 +8,7 @@ Adds an option on the context menu when you right click a folder to map that fol
 ### Options
 #### Folders:
 - Quick Map Drive:
-  - Temporarily mount your folder to the next available drive letter `Z-A`
+  - Temporarily mount your folder to the next available drive letter `Z → A`
 - Map Drive:
   - Gives you the option to specify a drive letter, name and whether the drive should persist across reboots
 
